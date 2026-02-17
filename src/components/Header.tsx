@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { ShoppingBag, User, Menu, X } from "lucide-react";
+import { User, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -24,7 +24,7 @@ export function Header() {
                         {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
                     <Link href="/" className="mr-6 flex items-center space-x-2">
-                        <ShoppingBag className="h-6 w-6" />
+                        <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
                         <span className="hidden font-bold sm:inline-block text-xl tracking-tight">
                             Eva's Trendifying Hub
                         </span>
@@ -79,3 +79,4 @@ export function Header() {
         </header>
     );
 }
+
