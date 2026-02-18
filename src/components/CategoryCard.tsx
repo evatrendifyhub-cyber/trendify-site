@@ -23,8 +23,8 @@ export function CategoryCard({ category, products, className }: CategoryCardProp
                             src={product.image}
                             alt={product.name}
                             fill
-                            priority
-                            unoptimized={true}
+                            priority={true} // Keeps this fast
+                            quality={70}    // Compresses the image to make it load instantly
                             className="object-contain p-1"
                             sizes="(max-width: 768px) 50vw, 25vw"
                         />
@@ -45,3 +45,4 @@ export function CategoryCard({ category, products, className }: CategoryCardProp
         </div>
     );
 }
+
