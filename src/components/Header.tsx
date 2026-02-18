@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { User, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -42,17 +42,9 @@ export function Header() {
                         >
                             Categories
                         </Link>
-
                     </nav>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <Link href="/login">
-                        <div className="h-8 w-8 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground">
-                            <User className="h-4 w-4" />
-                            <span className="sr-only">Sign In</span>
-                        </div>
-                    </Link>
-                </div>
+                {/* User icon section removed from here */}
             </div>
             {/* Mobile Menu */}
             {isMenuOpen && (
@@ -72,11 +64,9 @@ export function Header() {
                         >
                             Categories
                         </Link>
-
                     </nav>
                 </div>
             )}
         </header>
     );
 }
-
