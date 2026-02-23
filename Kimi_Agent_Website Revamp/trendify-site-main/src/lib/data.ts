@@ -1,0 +1,58 @@
+export const products = [
+    {
+        id: "1",
+        name: "Classic Tee",
+        price: 25.00,
+        category: "Clothing",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVlLXNoaXJ0fGVufDB8fDB8fHww",
+    },
+    {
+        id: "2",
+        name: "Summer Dress",
+        price: 45.00,
+        category: "Clothing",
+        image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmVtYWxlJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+        id: "3",
+        name: "Running Shoes",
+        price: 85.00,
+        category: "Footwear",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+        id: "4",
+        name: "Leather Belt",
+        price: 30.00,
+        category: "Accessories",
+        image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGVhdGhlciUyMGJlbHR8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+        id: "5",
+        name: "Denim Jacket",
+        price: 60.00,
+        category: "Clothing",
+        image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVuaW0lMjBqYWNrZXR8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+        id: "6",
+        name: "Smart Watch",
+        price: 150.00,
+        category: "Accessories",
+        image: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c21hcnQlMjB3YXRjaHxlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+        id: "7",
+        name: "Sunglasses",
+        price: 20.00,
+        category: "Accessories",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VuZ2xhc3Nlc3xlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+        id: "8",
+        name: "Travel Backpack",
+        price: 55.00,
+        category: "Accessories",
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFja3BhY2t8ZW58MHx8MHx8fDA%3D",
+    },
+];
