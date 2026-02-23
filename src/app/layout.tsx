@@ -42,6 +42,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
+      <head>
+        {/* This speeds up the redirect to your affiliate shop */}
+        <link rel="preconnect" href="https://www.digistore24.com" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background font-sans`}
       >
@@ -50,4 +54,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} // Removed the extra ")" that was here
