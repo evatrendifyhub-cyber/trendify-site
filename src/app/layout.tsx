@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <head>
-        {/* This speeds up the redirect to your affiliate shop */}
+        {/* Speed up the 'Buy Now' redirect to Digistore24 */}
         <link rel="preconnect" href="https://www.digistore24.com" />
       </head>
       <body
@@ -54,4 +54,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-} // Removed the extra ")" that was here
+}
