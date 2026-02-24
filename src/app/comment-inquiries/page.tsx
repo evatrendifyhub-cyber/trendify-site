@@ -4,31 +4,33 @@ import { useState } from "react";
 import { MessageCircle, Send, Mail, User, FileText, CheckCircle } from "lucide-react";
 
 export default function CommentInquiriesPage() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-    });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
         
-        // Simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        setIsSubmitting(false);
-        setIsSubmitted(true);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        // This sends the actual data to your Formspree account
+        const response = await fetch("https://formspree.io/f/xykdlwbv", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            setIsSubmitting(false);
+            setIsSubmitted(true);
+            form.reset();
+        } else {
+            setIsSubmitting(false);
+            alert("Oops! There was a problem submitting your form. Please try again.");
+        }
     };
 
     const inquiryTypes = [
@@ -42,8 +44,8 @@ export default function CommentInquiriesPage() {
     ];
 
     return (
-        <div className="min-h-screen py-12 md:py-20">
-            <div className="container px-4">
+        <div className="min-h-screen py-12 md:py-20 bg-background text-foreground">
+            <div className="container px-4 mx-auto">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-12">
@@ -52,7 +54,7 @@ export default function CommentInquiriesPage() {
                             <span className="text-sm font-medium text-violet-300">Get in Touch</span>
                         </div>
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-                            Send Us Your <span className="gradient-text">Inquiries</span>
+                            Send Us Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-pink-500">Inquiries</span>
                         </h1>
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                             Have a question, suggestion, or feedback? We&apos;d love to hear from you. 
@@ -72,7 +74,7 @@ export default function CommentInquiriesPage() {
                                         </div>
                                         <div>
                                             <p className="font-medium text-sm">Email Us</p>
-                                            <p className="text-sm text-muted-foreground">support@evatrendifyhub.com</p>
+                                            <p className="text-sm text-muted-foreground">eva.trendifyhub@gmail.com</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-3">
@@ -87,7 +89,7 @@ export default function CommentInquiriesPage() {
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-br from-violet-500/10 to-pink-500/10 border border-violet-500/20 rounded-xl p-6">
+                            <div className="bg-gradient-to-br from-violet-500/10 to-pink-500/10 border border-violet-500/20 rounded-xl p-6 text-foreground">
                                 <h3 className="text-lg font-semibold mb-2">Common Inquiries</h3>
                                 <ul className="space-y-2 text-sm text-muted-foreground">
                                     <li className="flex items-center gap-2">
@@ -106,10 +108,6 @@ export default function CommentInquiriesPage() {
                                         <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
                                         Website feedback and suggestions
                                     </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                                        New product recommendations
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -124,13 +122,10 @@ export default function CommentInquiriesPage() {
                                         </div>
                                         <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
                                         <p className="text-muted-foreground mb-6">
-                                            Your inquiry has been submitted successfully. We&apos;ll get back to you within 24-48 hours.
+                                            Your inquiry has been submitted successfully. We&apos;ll get back to you soon at your email address.
                                         </p>
                                         <button
-                                            onClick={() => {
-                                                setIsSubmitted(false);
-                                                setFormData({ name: "", email: "", subject: "", message: "" });
-                                            }}
+                                            onClick={() => setIsSubmitted(false)}
                                             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-pink-500 px-6 py-2.5 text-sm font-medium text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl"
                                         >
                                             Send Another Inquiry
@@ -140,7 +135,7 @@ export default function CommentInquiriesPage() {
                                     <form onSubmit={handleSubmit} className="space-y-6">
                                         <div className="grid sm:grid-cols-2 gap-4">
                                             <div className="space-y-2">
-                                                <label htmlFor="name" className="text-sm font-medium flex items-center gap-2">
+                                                <label htmlFor="name" className="text-sm font-medium flex items-center gap-2 text-foreground">
                                                     <User className="w-4 h-4 text-muted-foreground" />
                                                     Your Name
                                                 </label>
@@ -148,15 +143,13 @@ export default function CommentInquiriesPage() {
                                                     type="text"
                                                     id="name"
                                                     name="name"
-                                                    value={formData.name}
-                                                    onChange={handleChange}
                                                     required
-                                                    className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                                                    className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all text-foreground"
                                                     placeholder="John Doe"
                                                 />
                                             </div>
                                             <div className="space-y-2">
-                                                <label htmlFor="email" className="text-sm font-medium flex items-center gap-2">
+                                                <label htmlFor="email" className="text-sm font-medium flex items-center gap-2 text-foreground">
                                                     <Mail className="w-4 h-4 text-muted-foreground" />
                                                     Email Address
                                                 </label>
@@ -164,30 +157,26 @@ export default function CommentInquiriesPage() {
                                                     type="email"
                                                     id="email"
                                                     name="email"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
                                                     required
-                                                    className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                                                    className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all text-foreground"
                                                     placeholder="john@example.com"
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label htmlFor="subject" className="text-sm font-medium flex items-center gap-2">
+                                            <label htmlFor="subject" className="text-sm font-medium flex items-center gap-2 text-foreground">
                                                 <FileText className="w-4 h-4 text-muted-foreground" />
                                                 Inquiry Type
                                             </label>
                                             <select
                                                 id="subject"
                                                 name="subject"
-                                                value={formData.subject}
-                                                onChange={handleChange}
                                                 required
-                                                className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                                                className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all text-foreground"
                                             >
                                                 {inquiryTypes.map((type) => (
-                                                    <option key={type.value} value={type.value}>
+                                                    <option key={type.value} value={type.value} className="bg-card text-foreground">
                                                         {type.label}
                                                     </option>
                                                 ))}
@@ -195,26 +184,24 @@ export default function CommentInquiriesPage() {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <label htmlFor="message" className="text-sm font-medium flex items-center gap-2">
+                                            <label htmlFor="message" className="text-sm font-medium flex items-center gap-2 text-foreground">
                                                 <MessageCircle className="w-4 h-4 text-muted-foreground" />
                                                 Your Message
                                             </label>
                                             <textarea
                                                 id="message"
                                                 name="message"
-                                                value={formData.message}
-                                                onChange={handleChange}
                                                 required
                                                 rows={5}
-                                                className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"
-                                                placeholder="Tell us about your inquiry, question, or feedback..."
+                                                className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all resize-none text-foreground"
+                                                placeholder="Tell us about your inquiry..."
                                             />
                                         </div>
 
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-pink-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-pink-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
                                         >
                                             {isSubmitting ? (
                                                 <>
