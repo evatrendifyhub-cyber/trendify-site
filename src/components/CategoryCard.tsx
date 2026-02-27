@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
     category: string;
@@ -68,7 +67,9 @@ export function CategoryCard({ category, products, className, featured = false }
                 <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-violet-400 group-hover:text-pink-400 transition-colors flex items-center gap-1">
                         Explore All
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                        </svg>
                     </span>
                 </div>
             </div>
