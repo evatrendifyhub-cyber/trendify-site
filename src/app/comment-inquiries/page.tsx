@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { MessageCircle, Send, Mail, User, FileText, CheckCircle } from "lucide-react";
+import { MessageCircle, Send, Mail, User, FileText, CheckCircle, Phone } from "lucide-react";
 
 export default function CommentInquiriesPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -14,7 +14,7 @@ export default function CommentInquiriesPage() {
         const form = e.currentTarget;
         const formData = new FormData(form);
 
-        // This sends the actual data to your Formspree account
+        // This sends the data to your Formspree: https://formspree.io/f/xykdlwbv
         const response = await fetch("https://formspree.io/f/xykdlwbv", {
             method: "POST",
             body: formData,
@@ -36,7 +36,6 @@ export default function CommentInquiriesPage() {
     const inquiryTypes = [
         { value: "", label: "Select inquiry type" },
         { value: "product-question", label: "Product Question" },
-        { value: "order-inquiry", label: "Order Inquiry" },
         { value: "suggestion", label: "Suggestion" },
         { value: "feedback", label: "Feedback" },
         { value: "partnership", label: "Partnership Opportunity" },
@@ -57,13 +56,13 @@ export default function CommentInquiriesPage() {
                             Send Us Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-pink-500">Inquiries</span>
                         </h1>
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                            Have a question, suggestion, or feedback? We&apos;d love to hear from you. 
-                            Fill out the form below and we&apos;ll get back to you as soon as possible.
+                            Have a question about a product or a suggestion? Fill out the form below 
+                            and we&apos;ll get back to you as soon as possible via email.
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-5 gap-8">
-                        {/* Contact Info Sidebar */}
+                        {/* Contact Info Sidebar (CLEAN VERSION - NO PHONE) */}
                         <div className="md:col-span-2 space-y-6">
                             <div className="bg-card border border-border/50 rounded-xl p-6">
                                 <h3 className="text-lg font-semibold mb-4">Quick Info</h3>
@@ -94,25 +93,21 @@ export default function CommentInquiriesPage() {
                                 <ul className="space-y-2 text-sm text-muted-foreground">
                                     <li className="flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                                        Product availability questions
+                                        Product details & availability
                                     </li>
                                     <li className="flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                                        Pricing and discount inquiries
+                                        Custom gift suggestions
                                     </li>
                                     <li className="flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                                        Partnership opportunities
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                                        Website feedback and suggestions
+                                        Website feedback
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
-                        {/* Form */}
+                        {/* Form (Includes Phone field for Customer Data) */}
                         <div className="md:col-span-3">
                             <div className="bg-card border border-border/50 rounded-xl p-6 md:p-8">
                                 {isSubmitted ? (
@@ -122,7 +117,7 @@ export default function CommentInquiriesPage() {
                                         </div>
                                         <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
                                         <p className="text-muted-foreground mb-6">
-                                            Your inquiry has been submitted successfully. We&apos;ll get back to you soon at your email address.
+                                            Your inquiry has been submitted. We&apos;ll get back to you soon via email.
                                         </p>
                                         <button
                                             onClick={() => setIsSubmitted(false)}
@@ -162,6 +157,21 @@ export default function CommentInquiriesPage() {
                                                     placeholder="john@example.com"
                                                 />
                                             </div>
+                                        </div>
+
+                                        {/* CUSTOMER PHONE NUMBER FIELD */}
+                                        <div className="space-y-2">
+                                            <label htmlFor="phone" className="text-sm font-medium flex items-center gap-2 text-foreground">
+                                                <Phone className="w-4 h-4 text-muted-foreground" />
+                                                Your Phone Number (Optional)
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                id="phone"
+                                                name="phone"
+                                                className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all text-foreground"
+                                                placeholder="+1 000 000 0000"
+                                            />
                                         </div>
 
                                         <div className="space-y-2">
