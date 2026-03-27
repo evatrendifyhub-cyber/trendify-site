@@ -170,7 +170,7 @@ export default function CommentInquiriesPage() {
                                                 id="phone"
                                                 name="phone"
                                                 className="w-full bg-muted/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all text-foreground"
-                                                placeholder="+1 000 000 0000"
+                                                placeholder="+1 123 456 7890"
                                             />
                                         </div>
 
